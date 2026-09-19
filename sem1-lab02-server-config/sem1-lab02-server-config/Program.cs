@@ -35,6 +35,9 @@ public class Program
         public ServerState IsReady;
     }
 
+    /*
+     * Генерирует случайное имя для сервера из двух частей
+     */
     private static string GenRandomName()
     {
         Random rand = new Random();
@@ -43,6 +46,9 @@ public class Program
         return name1[rand.Next(0, name1.Length)] + ' ' + name2[rand.Next(0, name2.Length)];
     }
 
+    /*
+     * Генерирует случайный айпишник
+     */
     private static IPAddress GenRandomIp()
     {
         Random rand = new Random();
@@ -52,6 +58,9 @@ public class Program
         return ip;
     }
 
+    /*
+     * Создаёт случайный экземпляр сервера. По умолчанию IsReady = Ready
+     */
     private static Server GetServer()
     {
         Random rand = new Random();
@@ -69,11 +78,17 @@ public class Program
         return server;
     }
 
+    /*
+     * Проверяет показатели сервера и выдаёт ServerState для сервера
+     */
     public static ServerState CheckConfiguration(short playerCount, bool isPrivate, short ping, int errorsCount, out List<string> output)
     {
         return GetConfiguration(playerCount, isPrivate, ping, errorsCount, out output);
     }
 
+    /*
+     * Проверяет показатели сервера и выдаёт ServerState для сервера
+     */
     public static ServerState CheckConfiguration(Server server, out List<string> output)
     {
         short playerCount = server.PlayerCount;
@@ -83,7 +98,12 @@ public class Program
         return GetConfiguration(playerCount, isPrivate, ping, errorsCount, out output);
     }
     
-
+    /*
+     * Проверяет показатели сервера и выдаёт ServerState для сервера.
+     * Если пинг <200 и кол-во ошибок <10 - выдаёт Ready
+     * Если сервер запаролен или имеет 10-50 ошибок, или 200-500 пинг - выдаёт Warning
+     * В остальных случаях, либо если нет ни одного игрока(или их отрицательное кол-во) - выдаёт Error
+     */
     private static ServerState GetConfiguration(short playerCount, bool isPrivate, short ping, int errorsCount, out List<string> problems)
     {
         problems = new List<string>();
@@ -112,6 +132,9 @@ public class Program
         return state;
     }
     
+    /*
+     * Печатает в консолько хар-ки сервера, а так же все пометки о его проблемах
+     */
     private static void PrintServerStats(Server server)
     {
         Console.WriteLine($"Name: {server.ServerName}\n" +
@@ -130,11 +153,19 @@ public class Program
         }
     }
 
+    /*
+     * Преобразовывает скучную строку в крутую
+     */
     public static string ToCoolString(string str)
     {
         return $"------------------------------|{str}|------------------------------";
     }
 
+    /*
+     * Выводит в консоль вопрос о запуске сервера с вариантами ответа Y/N.
+     * Имеет защиту от неправильного ввода.
+     * В случае с отрицательным ответом завершает выполнение программы.
+     */
     private static void AskAboutStartup()
     {
         while (true)
