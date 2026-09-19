@@ -7,7 +7,8 @@ public class Program
     public static void Main()
     {
         Server server = GetServer();
-        Console.WriteLine($"{server.ServerName},{server.PlayerCount},{server.IsPrivate},{server.Ping},{server.Ip},{server.Port},{server.ErrorsCount},{server.IsReady}");
+        server.IsReady = CheckConfiguration(server, out var problems);
+        PrintServerStats(server);
     }
 
     public enum ServerState
@@ -54,12 +55,73 @@ public class Program
             ServerName =  GenRandomName(),
             PlayerCount = (short)rand.Next(short.MaxValue),
             IsPrivate = Convert.ToBoolean(rand.Next(0,2)),
-            Ping = (short)rand.Next(short.MaxValue),
+            Ping = (short)rand.Next(1200),
             Ip = GenRandomIp(),
             Port = rand.Next(2,65535),
             ErrorsCount = rand.Next(0,100),
             IsReady = ServerState.Ready
         };
         return server;
+    }
+
+    public static ServerState CheckConfiguration(short playerCount, bool isPrivate, short ping, int errorsCount, out List<string> output)
+    {
+        return GetConfiguration(playerCount, isPrivate, ping, errorsCount, out output);
+    }
+
+    public static ServerState CheckConfiguration(Server server, out List<string> output)
+    {
+        short playerCount = server.PlayerCount;
+        bool isPrivate = server.IsPrivate;
+        short ping = server.Ping;
+        int errorsCount = server.ErrorsCount;
+        return GetConfiguration(playerCount, isPrivate, ping, errorsCount, out output);
+    }
+    
+
+    private static ServerState GetConfiguration(short playerCount, bool isPrivate, short ping, int errorsCount, out List<string> problems)
+    {
+        problems = new List<string>();
+        ServerState state = ServerState.Error;
+        if (playerCount > 0)
+        {
+            if (errorsCount < 10 && ping < 200) state = ServerState.Ready;
+            if (isPrivate || errorsCount is < 50 and >= 10 || ping is < 500 and >= 200)
+            {
+                state = ServerState.Warning;
+                if (isPrivate) problems.Add("Сервер имеет пароль");
+                if (errorsCount is < 50 and >= 10) problems.Add("Большое количество ошибок");
+                if (ping is < 500 and >= 200) problems.Add("Высокий пинг");
+            }
+            if (errorsCount > 50 || ping > 500)
+            {
+                if (errorsCount > 50) problems.Add("Критическое количество ошибок!");
+                if (ping > 500) problems.Add("Критический пинг!");
+                state = ServerState.Error;
+            }
+        } else
+        {
+            state = ServerState.Error;
+            problems.Add("Сервер не может быть запущен без игроков");
+        }
+        return state;
+    }
+    
+    private static void PrintServerStats(Server server)
+    {
+        Console.WriteLine($"Name: {server.ServerName}\n" +
+                          $"PlCount: {server.PlayerCount}\n" +
+                          $"Private: {server.IsPrivate}\n" +
+                          $"Ping: {server.Ping}\n" +
+                          $"IpAdress: {server.Ip}:{server.Port}\n" +
+                          $"Errors: {server.ErrorsCount}\n" +
+                          $"Status: {server.IsReady}");
+        
+        CheckConfiguration(server, out var problems);
+        if (problems.Count > 0)
+        {
+            Console.WriteLine("\nПроблемы:");
+            foreach (var problem in problems) Console.WriteLine(problem);
+        }
     }
 }
