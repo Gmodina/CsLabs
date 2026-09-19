@@ -8,6 +8,11 @@ public class Program
     {
         Server server = GetServer();
         server.IsReady = CheckConfiguration(server, out var problems);
+        
+        Console.WriteLine("\n\n\n");
+        
+        AskAboutStartup();
+        
         PrintServerStats(server);
     }
 
@@ -122,6 +127,30 @@ public class Program
         {
             Console.WriteLine("\nПроблемы:");
             foreach (var problem in problems) Console.WriteLine(problem);
+        }
+    }
+
+    public static string ToCoolString(string str)
+    {
+        return $"------------------------------|{str}|------------------------------";
+    }
+
+    private static void AskAboutStartup()
+    {
+        while (true)
+        {
+            Console.Write("Хотите запустить сервер?(Y/N): ");
+            var ans = Console.ReadKey().Key;
+            if (ans == ConsoleKey.Y)
+            {
+                Console.WriteLine('\n' + ToCoolString("Инициализация сервера") + '\n');
+                break;
+            }
+            if (ans == ConsoleKey.N)
+            {
+                Environment.Exit(0);
+            }
+            Console.WriteLine();
         }
     }
 }
