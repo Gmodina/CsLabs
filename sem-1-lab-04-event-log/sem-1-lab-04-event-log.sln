@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sem-1-lab-04-event-log", "sem-1-lab-04-event-log\sem-1-lab-04-event-log.csproj", "{97495914-074B-4C37-A593-95205FF9C167}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Tests", "Project.Tests\Project.Tests.csproj", "{30241305-0F9F-44F8-BD4F-AB271ABE99A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97495914-074B-4C37-A593-95205FF9C167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97495914-074B-4C37-A593-95205FF9C167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97495914-074B-4C37-A593-95205FF9C167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97495914-074B-4C37-A593-95205FF9C167}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30241305-0F9F-44F8-BD4F-AB271ABE99A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30241305-0F9F-44F8-BD4F-AB271ABE99A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30241305-0F9F-44F8-BD4F-AB271ABE99A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30241305-0F9F-44F8-BD4F-AB271ABE99A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
