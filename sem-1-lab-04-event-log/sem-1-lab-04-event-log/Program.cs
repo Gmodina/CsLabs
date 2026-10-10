@@ -147,11 +147,28 @@ public class Program
         if (errors > 0) return "Есть ошибки: требуется проверка";
         return "Сервер работает штатно";
     }
+    /// <summary>
+    /// Метод экспортирует в файл строки лога из листа
+    /// </summary>
+    /// <param name="path"> Путь для сохранения файла</param>
+    /// <param name="entries"> Лист логов, который должен быть экспортирован</param>
+    public static void ExportFiltered(string path, List<LogEntry> entries)
+    {
+        string[] lines = new string[entries.Count];
+        int cnt = 0;
+        foreach (var entry in entries)
+        {
+            string line = $"{entry.Timestamp} [{entry.Level}][{entry.Category}] {entry.Message}";
+            lines[cnt] = line;
+            cnt++;
+        }
+        File.WriteAllLines(path, lines);
+    }
     
-    //Доп задание не успел сделать((
     public static void Main()
     {
         string[] lines = File.ReadAllLines("event_server.log");
         List<LogEntry> logs = ParseLog(lines);
+        ExportFiltered("event_server_filtred.log", Search(logs, "Ночные совы"));
     }
 }
