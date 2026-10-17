@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Server.Config;
+namespace sem1_lab_02_server_config;
 
 public class Program
 {
