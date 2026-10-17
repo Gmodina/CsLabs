@@ -35,7 +35,7 @@ public class Program
         public List<string> Inventory { get; set; }
     }
     
-    public class Position
+    public struct Position
     {
         public int X;
         public int Y;

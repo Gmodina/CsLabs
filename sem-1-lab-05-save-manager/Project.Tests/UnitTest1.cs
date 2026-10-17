@@ -79,8 +79,8 @@ public class SaveManagerTests
         Program.SaveEntry entry = Program.LoadIndex(_indexPath)[0];
         Program.SaveData save = Program.LoadSave(_savesDirectory, entry);
         save.Map = "Crystal Cavern";
-        save.Position.X = 10;
-        save.Position.Y = 25;
+        Program.Position newPos = new Program.Position { X = 10, Y = 25 };
+        save.Position = newPos;
         save.Health = 50;
         save.Inventory.Add("crystal key");
 
