@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sem-1-lab-05-save-manager", "sem-1-lab-05-save-manager\sem-1-lab-05-save-manager.csproj", "{4584CEF5-D048-4499-A16E-02ED9BEDEAC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Tests", "Project.Tests\Project.Tests.csproj", "{36894F42-C811-4BFE-AF11-821F9521A20C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4584CEF5-D048-4499-A16E-02ED9BEDEAC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4584CEF5-D048-4499-A16E-02ED9BEDEAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4584CEF5-D048-4499-A16E-02ED9BEDEAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4584CEF5-D048-4499-A16E-02ED9BEDEAC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36894F42-C811-4BFE-AF11-821F9521A20C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36894F42-C811-4BFE-AF11-821F9521A20C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36894F42-C811-4BFE-AF11-821F9521A20C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36894F42-C811-4BFE-AF11-821F9521A20C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
