@@ -1,14 +1,8 @@
-﻿
-using Server.Config;
-using NUnit.Framework;
-using System;
-using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Reflection;
-using NUnit.Framework;
-using Server.Config;
+using sem1_lab_02_server_config;
 
-namespace Server.Config.Tests;
+namespace Project.Tests;
 
 [TestFixture]
 public class ProgramTests

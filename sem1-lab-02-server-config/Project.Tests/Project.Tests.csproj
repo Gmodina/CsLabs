@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\sem1-lab-02-server-config\sem1-lab-02-server-config.csproj" />
       <ProjectReference Include="..\sem1-lab02-server-config\sem1-lab02-server-config.csproj" />
     </ItemGroup>
 

@@ -1,27 +1,27 @@
 # Common IntelliJ Platform excludes
 
 # User specific
-***/.idea/**/workspace.xml
-***/.idea/**/material_theme_project.xml
-***/.idea/**/tasks.xml
-***/.idea/shelf/*
-***/.idea/dictionaries
-***/.idea/httpRequests/
+**/.idea/**/workspace.xml
+**/.idea/**/material_theme_project.xml
+**/.idea/**/tasks.xml
+**/.idea/shelf/*
+**/.idea/dictionaries
+**/.idea/httpRequests/
 
 
 # Sensitive or high-churn files
-***/.idea/**/dataSources/
-***/.idea/**/dataSources.ids
-***/.idea/**/dataSources.xml
-***/.idea/**/dataSources.local.xml
-***/.idea/**/sqlDataSources.xml
-***/.idea/**/dynamic.xml
+**/.idea/**/dataSources/
+**/.idea/**/dataSources.ids
+**/.idea/**/dataSources.xml
+**/.idea/**/dataSources.local.xml
+**/.idea/**/sqlDataSources.xml
+**/.idea/**/dynamic.xml
 
 # Rider
 # Rider auto-generates .iml files, and contentModel.xml
-***/.idea/**/*.iml
-***/.idea/**/contentModel.xml
-***/.idea/**/modules.xml
+**/.idea/**/*.iml
+**/.idea/**/contentModel.xml
+**/.idea/**/modules.xml
 
 *.suo
 *.user
@@ -34,3 +34,8 @@ _UpgradeReport_Files/
 Thumbs.db
 Desktop.ini
 .DS_Store
+/sem-1-lab-04-event-log/.idea
+/sem-1-lab-03-report-generator/.idea
+/sem-1-lab-05-save-manager/.idea
+/sem-1-practice-2-log/.idea
+/sem1-lab-02-server-config/.idea
