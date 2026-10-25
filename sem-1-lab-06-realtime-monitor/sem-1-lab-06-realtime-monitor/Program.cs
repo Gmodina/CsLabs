@@ -2,10 +2,10 @@
 
 public class Program
 {
-    static double[] _cpuUsage = new double[20];
-    static double[] _ramUsage = new double[20];
-    static double[] _temperature = new double[20];
-    private static int _currIndex = 0;
+    public static double[] _cpuUsage = new double[20];
+    public static double[] _ramUsage = new double[20];
+    public static double[] _temperature = new double[20];
+    public static int _currIndex = 0;
     
     public static void Main()
     {
@@ -18,9 +18,17 @@ public class Program
         monitor.Stop();
     }
     
-    private static void OnDataReceived(double cpu, double ram, double temperature)
+    public static void OnDataReceived(double cpu, double ram, double temperature)
     {
-        Console.Clear();
+        //try-catch для юнит-тестов
+        try
+        {
+            Console.Clear();
+        }
+        catch
+        {
+            //для юнит-тестов
+        }
         
         int arrLength = _cpuUsage.Length-1;
 
@@ -47,7 +55,7 @@ public class Program
         
     }
 
-    private static string BuildGraph(double[] arr)
+    public static string BuildGraph(double[] arr)
     {
         string graph = "";
         foreach (var item in arr)
@@ -55,7 +63,7 @@ public class Program
             if (item >= 75) graph += "█ ";
             if (item is >= 50 and < 75) graph += "▓ ";
             if (item is >= 25 and < 50) graph += "▒ ";
-            if (item is > 0 and < 25) graph += "░ ";
+            if (item is >= 0 and < 25) graph += "░ ";
         }
         return graph;
     }
