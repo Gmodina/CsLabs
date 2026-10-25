@@ -26,7 +26,7 @@ class Program
     
     private static string GetLogType(string line)
     {
-        return line.Substring(line.IndexOf('[', line.IndexOf('[')+1)+1, line.IndexOf(']') - line.IndexOf('['));
+        return line.Substring(line.IndexOf('[', line.IndexOf('[')+1)+1, line.IndexOf(']') - line.IndexOf('[')+1);
     }
 
     private static string GetLogText(string line)
@@ -61,10 +61,11 @@ class Program
             };
             logs.Add(log);
         }
-        
-        Console.WriteLine(logs[2].DateTime);
-        Console.WriteLine(logs[2].Level);
-        Console.WriteLine(logs[2].Type);
-        Console.WriteLine(logs[2].Text);
+
+        int num = 25;
+        Console.WriteLine(logs[num].DateTime);
+        Console.WriteLine(logs[num].Level);
+        Console.WriteLine(logs[num].Type);
+        Console.WriteLine(logs[num].Text);
     }
 }
