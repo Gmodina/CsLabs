@@ -60,10 +60,10 @@ public class Program
         string graph = "";
         foreach (var item in arr)
         {
-            if (item >= 75) graph += "█ ";
-            if (item is >= 50 and < 75) graph += "▓ ";
-            if (item is >= 25 and < 50) graph += "▒ ";
-            if (item is >= 0 and < 25) graph += "░ ";
+            if (item >= 75) graph += $"█ {Math.Round(item)} ";
+            if (item is >= 50 and < 75) graph += $"▓ {Math.Round(item)} ";
+            if (item is >= 25 and < 50) graph += $"▒ {Math.Round(item)} ";
+            if (item is >= 0 and < 25) graph += $"░ {Math.Round(item)} ";
         }
         return graph;
     }

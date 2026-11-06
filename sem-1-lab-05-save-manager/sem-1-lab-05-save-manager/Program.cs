@@ -12,6 +12,8 @@ public class Program
     
     public static void Main()
     {
+        Directory.CreateDirectory("saves");
+        Directory.CreateDirectory("backups");
         while (true)
         {
             Console.Clear();
@@ -79,16 +81,18 @@ public class Program
         catch (FileNotFoundException)
         {
             Console.WriteLine("Указанный файл не найден");
+            throw;
         }
         catch (JsonReaderException)
         {
             Console.WriteLine("Не удалось прочитать файл");
+            throw;
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
+            throw;
         }
-        return save;
     }
 
     public static void PrintSave(SaveEntry entry, SaveData save)
@@ -375,8 +379,8 @@ public class Program
                         AddNewLogString(saveName, "Изменение хар-ик персонажа", false);
                     }
                     saveData.Inventory = newItems;
-                    saveEntry.UpdatedAt = DateTime.Now.ToLocalTime();
                 }
+                saveEntry.UpdatedAt = DateTime.Now.ToLocalTime();
                 SaveGame(savesDirectory,saveEntry, saveData);
                 SaveIndex(indexPath, entries);
                 break;
