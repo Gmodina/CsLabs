@@ -28,7 +28,15 @@ public static class Program
 
         public string BuildTree()
         {
-            _result.AppendLine(lines[0]);
+            try
+            {
+                _result.AppendLine(lines[0]);
+            }
+            catch
+            {
+                return "Неправильный формат файла";
+            }
+
             _lineIndex = 1;
             PrintTree();
             return _result.ToString();
@@ -36,8 +44,7 @@ public static class Program
         
         private void PrintTree()
         {
-            //добавлено -1 из-за выхода за пределы массива
-            while (_lineIndex < lines.Length-1)
+            while (_lineIndex < lines.Length)
             {
                 var line = lines[_lineIndex].Trim();
             

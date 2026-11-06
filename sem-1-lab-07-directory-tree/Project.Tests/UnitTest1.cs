@@ -55,13 +55,13 @@ public class TreeBuilderTests
     }
 
     [Test]
-    public void BuildTree_EmptyArray_ReturnsCorrectFormat()
+    public void BuildTree_EmptyArray_ReturnsError()
     {
         string[] inputLines = [];
         
         var builder = new TreeBuilder(inputLines);
         string actualResult = builder.BuildTree();
-        string expectedResult = "";
+        string expectedResult = "Неправильный формат файла";
         
         Assert.That(actualResult, Is.EqualTo(expectedResult));
     }
