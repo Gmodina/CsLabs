@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sem-1-lab-08-map-editor", "sem-1-lab-08-map-editor\sem-1-lab-08-map-editor.csproj", "{30DD8031-EAC1-43E2-AFAB-C93F53BE160D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Tests", "Project.Tests\Project.Tests.csproj", "{33ACDDA8-B0E8-4E98-ADE1-DF8E9AE64A21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30DD8031-EAC1-43E2-AFAB-C93F53BE160D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30DD8031-EAC1-43E2-AFAB-C93F53BE160D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30DD8031-EAC1-43E2-AFAB-C93F53BE160D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30DD8031-EAC1-43E2-AFAB-C93F53BE160D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33ACDDA8-B0E8-4E98-ADE1-DF8E9AE64A21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33ACDDA8-B0E8-4E98-ADE1-DF8E9AE64A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33ACDDA8-B0E8-4E98-ADE1-DF8E9AE64A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33ACDDA8-B0E8-4E98-ADE1-DF8E9AE64A21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
