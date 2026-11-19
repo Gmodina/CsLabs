@@ -9,18 +9,28 @@ public class Program
     
     public static void Main()
     {
+        //В тз нет задачи делать интерфейс, а потому я его делать не буду
         Console.CursorVisible = false;
 
         string[] mapFile = File.ReadAllLines("map.txt");
         
         Map map = new Map(mapFile);
         
-        // map.CreateNewMap(20, 20, "map2.txt");
+        map.CreateNewMap(5, 5, "map2.txt"); //создание новой карты
         
-        map.RewriteCell(new Position(3, 1), CellType.Water);
+        map.RewriteCell(new Position(3, 1), CellType.Water); //изменение типа отдельных клеток
         Console.Clear();
-        map.PlacePlayer(new Position(1,2));
+        map.PlacePlayer(new Position(1,2));//размещение игрока на карте
+        map.SaveState();//сохранение текущего состояния локально
+        map.MovePlayer(new Position(2,2));//перемещение игрока по карте
+        map.PrintMap();//отображение карты в консоли
+        map.SaveMap("map3.txt");//сохранение текущего состояния карты в файл
+        map.ScanMap(File.ReadAllLines("map3.txt"));//восстановление ранее сохранённого состояния из файла
         map.PrintMap();
+        map.LoadState(0);//восстановление состояний локально
+
+        var map2 = new Map(13, 12, "mapp14.txt");
+        map2.PrintMap();
     }
 }
 
@@ -28,9 +38,13 @@ public class Program
 public class Map
 {
     private readonly Random _rnd = new();
-    private List<Cell> _cells = [];
+    private List<Cell> _cells = []; //можно было бы сделать через двумерный массив
     private Player _player;
     private string[] _mapFile;
+    public int MapWidth;
+    public int MapHeight;
+    private int _currentId = 0;
+    private List<State> _states = [];
 
     public Map(string[] mapFile)
     {
@@ -43,6 +57,11 @@ public class Map
         {
             Console.WriteLine(e.Message);
         }
+    }
+
+    public Map(int width, int height, string newMapPath)
+    {
+        CreateNewMap(width, height, newMapPath);
     }
     
     public void CreateNewMap(int width, int height, string newMapPath)
@@ -71,8 +90,19 @@ public class Map
         if (height>1) map.AppendLine(cover);
         
         File.WriteAllText(newMapPath, map.ToString());
-        _cells = [];
-        ScanMap(File.ReadAllLines(newMapPath));
+
+        try
+        {
+            _cells = [];
+            ScanMap(File.ReadAllLines(newMapPath));
+            _player = new();
+            MapHeight = height;
+            MapWidth = width;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 
     public void RewriteCell(Cell oldCell, CellType newType)
@@ -93,9 +123,9 @@ public class Map
         }
     }
 
-    private void ScanMap(string[] mapFile)
+    public void ScanMap(string[] mapFile)
     {
-        if (mapFile.Length == 0) throw new ArgumentException("Map file is empty");
+        if (mapFile.Length <= 0) throw new ArgumentException("Map file is empty");
         for (int h = 0; h < mapFile.Length; h++)
         {
             for (int w = 0; w < mapFile[h].Length; w++)
@@ -119,9 +149,11 @@ public class Map
                 }
             }
         }
+        MapHeight = mapFile.Length-1;
+        MapWidth = mapFile[1].Length;
     }
 
-    public Cell GetCell(Position pos)
+    private Cell GetCell(Position pos)
     {
         foreach (var cell in _cells)
         { 
@@ -132,17 +164,69 @@ public class Map
 
     public void PlacePlayer(Position pos)
     {
-        var posCellType = GetCell(pos).Type;
+        var targetCellType = GetCell(pos).Type;
         
-        //проверка на существование егрока
+        if (_player.Position.Y != 0) throw new Exception($"Player already placed at ({_player.Position.X}, {_player.Position.Y})");
         
-        if (posCellType == CellType.Ground) RewriteCell(pos, CellType.Player);
-        else throw new ArgumentException($"Invalid position ({pos.X},{pos.Y}) there is {posCellType}");
+        if (targetCellType == CellType.Ground)
+        {
+            RewriteCell(pos, CellType.Player);
+            _player.Position = pos;
+        }
+        else throw new ArgumentException($"Invalid position ({pos.X},{pos.Y}), there is {targetCellType}");
+    }
+
+    public void MovePlayer(Position pos)
+    {
+        var targetCellType = GetCell(pos).Type;
+
+        if (targetCellType == CellType.Ground)
+        {
+            RewriteCell(new Position(_player.Position.X, _player.Position.Y), CellType.Ground);
+            RewriteCell(pos, CellType.Player);
+            _player.Position = pos;
+        }
+        
+        else throw new ArgumentException($"Can't move player to ({pos.X},{pos.Y}), there is {targetCellType}");
+    }
+
+    public void SaveMap(string saveMapPath)
+    {
+        StringBuilder sb = new();
+        
+        sb.AppendLine($"{MapWidth.ToString()}|{MapHeight.ToString()}");
+
+        int i = 0;
+        char[] symbols = new char[MapWidth];
+        foreach (var cell in _cells)
+        {
+            symbols[i] = cell.GetCellSymbol();
+            i++;
+            if (i == MapWidth)
+            {
+                sb.AppendLine(new string(symbols));
+                i = 0;
+            }
+        }
+        File.WriteAllText(saveMapPath, sb.ToString());
+    }
+
+    public void SaveState()
+    {
+        var state = new State(_currentId, _cells, _player);
+        _states.Add(state);
+        _currentId++;
+    }
+
+    public void LoadState(int id)
+    {
+        if (_states.Count <= id) return;
+        _cells = _states[id].Cells;
+        _player = _states[id].Player;
     }
 
     public void PrintMap()
     {
-        
         foreach (var cell in _cells)
         {
             Console.SetCursorPosition(cell.Position.X, cell.Position.Y);
@@ -190,11 +274,11 @@ public struct Cell(Position pos, CellType cellType)
 public struct Player(Position pos)
 {
     public Position Position = pos;
-    
-    public void Move(Position pos)
-    {
-        //удалять прошлого
-        Position = pos;
-    }
-    
+}
+
+public class State(int id, List<Cell> cells, Player player)
+{
+    public int Id = id;
+    public List<Cell> Cells = cells;
+    public Player Player = player;
 }
