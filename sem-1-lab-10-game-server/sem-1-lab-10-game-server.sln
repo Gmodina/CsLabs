@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sem-1-lab-10-game-server", "sem-1-lab-10-game-server\sem-1-lab-10-game-server.csproj", "{B03D9B13-979C-4E8D-8574-256B8D2DDDF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Tests", "Project.Tests\Project.Tests.csproj", "{16B82C51-E42B-48CC-8D6E-8F75BF985B4E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B03D9B13-979C-4E8D-8574-256B8D2DDDF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B03D9B13-979C-4E8D-8574-256B8D2DDDF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B03D9B13-979C-4E8D-8574-256B8D2DDDF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B03D9B13-979C-4E8D-8574-256B8D2DDDF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16B82C51-E42B-48CC-8D6E-8F75BF985B4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16B82C51-E42B-48CC-8D6E-8F75BF985B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16B82C51-E42B-48CC-8D6E-8F75BF985B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16B82C51-E42B-48CC-8D6E-8F75BF985B4E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
